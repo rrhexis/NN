@@ -10,7 +10,7 @@ x_train.shape
 
 plt.title(y_train[10])
 plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
-plt.show()
+#plt.show()
 
 def display_digit(num):
     label = y_train[num]
@@ -19,7 +19,7 @@ def display_digit(num):
     plt.imshow(image, cmap=plt.get_cmap('gray_r'))
     plt.show()
 
-display_digit(2908)
+#display_digit(2908)
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -28,7 +28,7 @@ model = tf.keras.models.Sequential([
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.1),
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
