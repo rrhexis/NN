@@ -28,7 +28,7 @@ model = tf.keras.models.Sequential([
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.1),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
@@ -42,3 +42,4 @@ print("Loss = {}, accuracy = {}".format(loss, acc))
 predictions = model.predict(x_test[0:1,:,:])
 print(predictions)
 print(y_test[0])
+print("Hello")
