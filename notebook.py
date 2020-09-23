@@ -4,7 +4,7 @@ mnist = tf.keras.datasets.mnist
 import matplotlib.pyplot as plt
 
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
-x_train, x_test = x_train / 255.0, x_test / 255.0
+#x_train, x_test = x_train / 255.0, x_test / 255.0
 
 x_train.shape
 
@@ -32,13 +32,40 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
+#блок обучения на ненормированной выборке и теста на нормированной
+"""model.fit(x_train, y_train, epochs=3)
+
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
+loss, acc = model.evaluate(x_test, y_test)
+print("Loss = {}, accuracy = {}".format(loss, acc))
+
+loss, acc = model.evaluate(x_train, y_train)
+print("Loss = {}, accuracy = {}".format(loss, acc))"""
+
+#блок обучения на нормированной выборке и теста на ненормированной
+x_train, x_test = x_train / 255.0, x_test / 255.0
+
 model.fit(x_train, y_train, epochs=3)
+
+x_train, x_test = x_train * 255.0, x_test * 255.0
 
 loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
+
+#блок обычного обучения
+"""x_train, x_test = x_train / 255.0, x_test / 255.0
+
+model.fit(x_train, y_train, epochs=3)
+
+loss, acc = model.evaluate(x_test, y_test)
+print("Loss = {}, accuracy = {}".format(loss, acc))
+
+loss, acc = model.evaluate(x_train, y_train)
+print("Loss = {}, accuracy = {}".format(loss, acc))"""
 
 predictions = model.predict(x_test[0:1,:,:])
 print(predictions)
