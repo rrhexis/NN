@@ -19,9 +19,9 @@ def display_digit(num):
   plt.imshow(image, cmap=plt.get_cmap('gray_r'))
   plt.show()
 
-  display_digit(2908)
+display_digit(2908)
 
-  model = tf.keras.models.Sequential([
+model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
   tf.keras.layers.Dense(100, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.0),
