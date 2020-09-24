@@ -8,7 +8,7 @@ import matplotlib.pyplot as plt
 
 x_train.shape
 
-plt.title(y_train[10])
+"""plt.title(y_train[10])
 plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
 plt.show()
 
@@ -19,7 +19,7 @@ def display_digit(num):
   plt.imshow(image, cmap=plt.get_cmap('gray_r'))
   plt.show()
 
-display_digit(2908)
+display_digit(2908)"""
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -33,7 +33,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               metrics=['accuracy'])
 
 #блок обучения на ненормированной выборке и теста на нормированной
-"""model.fit(x_train, y_train, epochs=3)
+model.fit(x_train, y_train, epochs=3)
 
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
@@ -41,10 +41,10 @@ loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 loss, acc = model.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss, acc))"""
+print("Loss = {}, accuracy = {}".format(loss, acc))
 
 #блок обучения на нормированной выборке и теста на ненормированной
-x_train, x_test = x_train / 255.0, x_test / 255.0
+"""x_train, x_test = x_train / 255.0, x_test / 255.0
 
 model.fit(x_train, y_train, epochs=3)
 
@@ -54,7 +54,7 @@ loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 loss, acc = model.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss, acc))
+print("Loss = {}, accuracy = {}".format(loss, acc))"""
 
 #блок обычного обучения
 """x_train, x_test = x_train / 255.0, x_test / 255.0
