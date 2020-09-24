@@ -31,7 +31,7 @@ def display_digit(num, x, y, vector = None):
     plt.title('Predicted label: {}'.format(predicted_label))
   plt.show()
 
-display_digit(20, x_train, y_train))
+display_digit(20, x_train, y_train)
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
