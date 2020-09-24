@@ -20,6 +20,8 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
+model.summary()
+
 model.fit(x_train, y_train, epochs=10)
 
 loss, acc = model.evaluate(x_test, y_test)
