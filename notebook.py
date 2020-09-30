@@ -86,5 +86,8 @@ plt.legend()
 plt.xlim([0,max(history.epoch)])
 plt.show()
 
+for i in range(10):
+    display_digit(i,x_test,y_test,model(x_test[i:i+1,:,:])[0])
+
 print("loss(overfit) / loss(standart) = ", loss_overfit / loss)
 
