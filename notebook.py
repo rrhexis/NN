@@ -31,11 +31,30 @@ def display_digit(num, x, y, vector = None):
     plt.title('Predicted label: {}'.format(predicted_label))
   plt.show()
 
-display_digit(20, x_train, y_train)
+#overfit model
+model_overfit = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(28, 28)),
+  tf.keras.layers.Dropout(0.0),
+  tf.keras.layers.Dense(200, activation=tf.nn.relu),
+  tf.keras.layers.Dropout(0.0),
+  tf.keras.layers.Dense(10, activation=tf.nn.softmax)
+])
 
+model_overfit.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
+              loss=tf.keras.losses.sparse_categorical_crossentropy,
+              metrics=['accuracy'])
+history_overfit = model_overfit.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))
+
+loss_overfit, acc_overfit = model_overfit.evaluate(x_test, y_test)
+print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
+
+loss_overfit, acc_overfit = model_overfit.evaluate(x_train, y_train)
+print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
+
+#standart model
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
-  tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dropout(0.5),
   tf.keras.layers.Dense(100, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.2),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
@@ -44,23 +63,7 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
-history = model.fit(x_train, y_train, epochs=50, validation_data=(x_test, y_test))
-
-plt.figure(figsize=(16,10))
-plt.xlabel('Epochs')
-plt.ylabel("Sparse_categorical_crossentropy")
-val = plt.plot(history.epoch, history.history['val_'+'loss'],
-                   '--', label='Val')
-plt.plot(history.epoch, history.history["loss"], color=val[0].get_color(),
-             label='Train')
-plt.legend()
-plt.xlim([0,max(history.epoch)])
-plt.show()
-
-for i in range(10):
-  display_digit(i,x_test,y_test,model(x_test[i:i+1,:,:])[0])
-
-model.fit(x_train, y_train, epochs=3)
+history = model.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))
 
 loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
@@ -68,6 +71,20 @@ print("Loss = {}, accuracy = {}".format(loss, acc))
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
-predictions = model.predict(x_test[0:1,:,:])
-print(predictions)
-print(y_test[0])
+plt.figure(figsize=(10,7))
+plt.xlabel('Epochs')
+plt.ylabel("Sparse_categorical_crossentropy")
+val_overfit = plt.plot(history.epoch, history.history['val_'+'loss'],
+                   '--', label='Val standart')
+val = plt.plot(history_overfit.epoch, history_overfit.history['val_'+'loss'],
+                   '--', label='Val overfit')
+plt.plot(history.epoch, history.history["loss"],
+             label='Train standart')
+plt.plot(history_overfit.epoch, history_overfit.history["loss"],
+             label='Train overfit')
+plt.legend()
+plt.xlim([0,max(history.epoch)])
+plt.show()
+
+print("loss(overfit) / loss(standart) = ", loss_overfit / loss)
+
