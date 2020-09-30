@@ -40,7 +40,7 @@ model_overfit = tf.keras.models.Sequential([
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
-model_overfit.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
+model_overfit.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 history_overfit = model_overfit.fit(x_train, y_train, epochs=20, validation_data=(x_test, y_test))
@@ -54,13 +54,13 @@ print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
 #standart model
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
-  tf.keras.layers.Dropout(0.5),
-  tf.keras.layers.Dense(100, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.2),
+  tf.keras.layers.Dense(80, activation=tf.nn.relu),
+  tf.keras.layers.Dropout(0.1),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
 
-model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
+model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 history = model.fit(x_train, y_train, epochs=20, validation_data=(x_test, y_test))
