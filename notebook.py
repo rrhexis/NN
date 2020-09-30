@@ -43,7 +43,7 @@ model_overfit = tf.keras.models.Sequential([
 model_overfit.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
-history_overfit = model_overfit.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))
+history_overfit = model_overfit.fit(x_train, y_train, epochs=20, validation_data=(x_test, y_test))
 
 loss_overfit, acc_overfit = model_overfit.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
@@ -63,7 +63,7 @@ model = tf.keras.models.Sequential([
 model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.005),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
-history = model.fit(x_train, y_train, epochs=3, validation_data=(x_test, y_test))
+history = model.fit(x_train, y_train, epochs=20, validation_data=(x_test, y_test))
 
 loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
