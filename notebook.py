@@ -24,8 +24,8 @@ model_overfit.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               metrics=['accuracy'])
 history_overfit = model_overfit.fit(x_train, y_train, epochs=1, validation_data=(x_test, y_test))
 
-loss_overfit, acc_overfit = model_overfit.evaluate(x_test, y_test)
-print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
+loss_overfit_test, acc_overfit_test = model_overfit.evaluate(x_test, y_test)
+print("Loss = {}, accuracy = {}".format(loss_overfit_test, acc_overfit_test))
 
 loss_overfit, acc_overfit = model_overfit.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
@@ -44,8 +44,8 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               metrics=['accuracy'])
 history = model.fit(x_train, y_train, epochs=1, validation_data=(x_test, y_test))
 
-loss, acc = model.evaluate(x_test, y_test)
-print("Loss = {}, accuracy = {}".format(loss, acc))
+loss_test, acc_test = model.evaluate(x_test, y_test)
+print("Loss = {}, accuracy = {}".format(loss_test, acc_test))
 
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
@@ -66,5 +66,5 @@ plt.xlim([0,max(history.epoch)])
 plt.show()
 
 
-print("loss(overfit) / loss(standart) = ", loss_overfit / loss)
+print("loss(overfit) / loss(standart) = ", loss_overfit_test / loss_test)
 
