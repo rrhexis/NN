@@ -1,4 +1,5 @@
 import tensorflow as tf
+import numpy as np
 mnist = tf.keras.datasets.mnist
 
 import matplotlib.pyplot as plt
@@ -10,7 +11,7 @@ x_train.shape
 
 plt.title(y_train[10])
 plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
-plt.show()
+#plt.show()
 
 def display_digit(num):
   label = y_train[num]
@@ -19,7 +20,7 @@ def display_digit(num):
   plt.imshow(image, cmap=plt.get_cmap('gray_r'))
   plt.show()
 
-display_digit(2908)
+#display_digit(2908)
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -32,7 +33,7 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=3)
+model.fit(x_train, y_train, epochs=1)
 
 loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
@@ -40,6 +41,6 @@ print("Loss = {}, accuracy = {}".format(loss, acc))
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
-predictions = model.predict(x_test[0:1,:,:])
-print(predictions)
-print(y_test[0])
+for i in y_test[y_test != np.argmax(model.predict(x_test), axis = 1)]:
+  display_digit(i)
+
