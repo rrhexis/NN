@@ -27,8 +27,8 @@ history_overfit = model_overfit.fit(x_train, y_train, epochs=1, validation_data=
 loss_overfit_test, acc_overfit_test = model_overfit.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss_overfit_test, acc_overfit_test))
 
-loss_overfit, acc_overfit = model_overfit.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss_overfit, acc_overfit))
+loss_overfit_train, acc_overfit_train = model_overfit.evaluate(x_train, y_train)
+print("Loss = {}, accuracy = {}".format(loss_overfit_train, acc_overfit_train))
 
 #standart model
 model = tf.keras.models.Sequential([
@@ -47,8 +47,8 @@ history = model.fit(x_train, y_train, epochs=1, validation_data=(x_test, y_test)
 loss_test, acc_test = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss_test, acc_test))
 
-loss, acc = model.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss, acc))
+loss_train, acc_train = model.evaluate(x_train, y_train)
+print("Loss = {}, accuracy = {}".format(loss_train, acc_train))
 
 plt.figure(figsize=(10,7))
 plt.xlabel('Epochs')
@@ -65,6 +65,7 @@ plt.legend()
 plt.xlim([0,max(history.epoch)])
 plt.show()
 
+print("Для переобученной модели: ", (1 - acc_overfit_train) / (1 - acc_overfit_test))
+print("Для обычной модели: ",  (1 - acc_train) / (1 - acc_test))
 
-print("loss(overfit) / loss(standart) = ", loss_overfit_test / loss_test)
 
