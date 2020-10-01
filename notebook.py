@@ -7,11 +7,9 @@ import matplotlib.pyplot as plt
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-x_train.shape
-
 plt.title(y_train[10])
 plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
-#plt.show()
+plt.show()
 
 def display_digit(num):
   label = y_train[num]
@@ -41,6 +39,12 @@ print("Loss = {}, accuracy = {}".format(loss, acc))
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
-for i in y_test[y_test != np.argmax(model.predict(x_test), axis = 1)]:
-  display_digit(i)
+
+trash = y_test[y_test != np.argmax(model.predict(x_test), axis = 1)]
+print(trash)
+print(len(trash))
+plt.hist(trash, edgecolor = 'black')
+plt.show()
+
+
 
