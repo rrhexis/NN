@@ -7,10 +7,6 @@ import matplotlib.pyplot as plt
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-plt.title(y_train[10])
-plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
-plt.show()
-
 def display_digit(num, x, y, vector = None):
     label = y[num]
     image = x[num]
