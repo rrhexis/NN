@@ -11,14 +11,27 @@ plt.title(y_train[10])
 plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
 plt.show()
 
-def display_digit(num):
-  label = y_train[num]
-  image = x_train[num]
-  plt.title('Example: {}  Label: {}'.format(num, label))
-  plt.imshow(image, cmap=plt.get_cmap('gray_r'))
-  plt.show()
+def display_digit(num, x, y, vector = None):
+    label = y[num]
+    image = x[num]
+    if vector is None:
+        plt.title('Example: {}  Label: {}'.format(num, label))
+        plt.imshow(image, cmap=plt.get_cmap('gray_r'))
+    else:
+        plt.figure(figsize=(6,3))
+        plt.subplot(1,2,1)
+        plt.title('Real label: {}'.format(label))
+        plt.imshow(image, cmap=plt.get_cmap('gray_r'))
+        plt.subplot(1,2,2)
+        thisplot = plt.bar(range(10), vector, color="#777777")
+        plt.ylim([0, 1]) 
+        plt.xticks([])
+        plt.yticks([])
+        predicted_label = np.argmax(vector)
+        thisplot[predicted_label].set_color('red')
+        plt.title('Predicted label: {}'.format(predicted_label))
+    plt.show()
 
-#display_digit(2908)
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
@@ -40,11 +53,12 @@ loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 
-trash = y_test[y_test != np.argmax(model.predict(x_test), axis = 1)]
+trash = (np.asarray(np.where(y_test != np.argmax(model.predict(x_test), axis = 1)))).ravel()
 print(trash)
 print(len(trash))
-plt.hist(trash, edgecolor = 'black')
-plt.show()
+#plt.hist(trash, edgecolor = 'black')
+#plt.show()
 
-
+for i in range(3):
+  display_digit(trash[i:i+1], x_test, y_test)
 
