@@ -53,9 +53,7 @@ print("Loss = {}, accuracy = {}".format(loss, acc))
 trash = (np.asarray(np.where(y_test != np.argmax(model.predict(x_test), axis = 1)))).ravel()
 print(trash)
 print(len(trash))
-#plt.hist(trash, edgecolor = 'black')
-#plt.show()
 
-for i in range(1):
+for i in range(10):
   display_digit(trash[i], x_test, y_test, model(x_test[trash[i]:trash[i]+1,:,:])[0])
 
