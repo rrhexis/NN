@@ -13,19 +13,16 @@ print(y_train.shape)
 x_train.resize(x_train.shape[0], x_train.shape[1] * x_train.shape[2] + 1)
 for i in range(len(y_train)):
   x_train[i][-1] = y_train[i]
-#  x_train[i] = np.append(x_train[i], y_train[i])
-
-print(x_train.shape)
 
 x_test.resize(x_test.shape[0], x_test.shape[1] * x_test.shape[2] + 1)
 for i in range(len(y_test)):
   x_test[i][-1] = y_test[i]
 
-print(x_test.shape)
 
-"""model = tf.keras.models.Sequential([
-  tf.keras.layers.Flatten(input_shape=()),
-  tf.keras.layers.Dense(100, activation=tf.nn.relu),
+
+model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=(785, )),
+  tf.keras.layers.Dense(200, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.0),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
@@ -34,13 +31,13 @@ model.compile(optimizer=tf.keras.optimizers.Adam(learning_rate=0.001),
               loss=tf.keras.losses.sparse_categorical_crossentropy,
               metrics=['accuracy'])
 
-model.fit(x_train, y_train, epochs=1)
+model.fit(x_train, y_train, epochs=10)
 
 loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 loss, acc = model.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss, acc))"""
+print("Loss = {}, accuracy = {}".format(loss, acc))
 
 
 
