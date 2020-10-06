@@ -60,5 +60,5 @@ print(len(trash))
 #plt.show()
 
 for i in range(3):
-  display_digit(trash[i:i+1], x_test, y_test)
+  display_digit(trash[i], x_test, y_test, )
 
