@@ -7,21 +7,24 @@ import matplotlib.pyplot as plt
 (x_train, y_train),(x_test, y_test) = mnist.load_data()
 x_train, x_test = x_train / 255.0, x_test / 255.0
 
-plt.title(y_train[10])
-plt.imshow(x_train[10], cmap=plt.get_cmap('gray_r'))
-plt.show()
+print(x_train.shape)
+print(y_train.shape)
 
-def display_digit(num):
-  label = y_train[num]
-  image = x_train[num]
-  plt.title('Example: {}  Label: {}'.format(num, label))
-  plt.imshow(image, cmap=plt.get_cmap('gray_r'))
-  plt.show()
+x_train.resize(x_train.shape[0], x_train.shape[1] * x_train.shape[2] + 1)
+for i in range(len(y_train)):
+  x_train[i][-1] = y_train[i]
+#  x_train[i] = np.append(x_train[i], y_train[i])
 
-#display_digit(2908)
+print(x_train.shape)
 
-model = tf.keras.models.Sequential([
-  tf.keras.layers.Flatten(input_shape=(28, 28)),
+x_test.resize(x_test.shape[0], x_test.shape[1] * x_test.shape[2] + 1)
+for i in range(len(y_test)):
+  x_test[i][-1] = y_test[i]
+
+print(x_test.shape)
+
+"""model = tf.keras.models.Sequential([
+  tf.keras.layers.Flatten(input_shape=()),
   tf.keras.layers.Dense(100, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.0),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
@@ -37,14 +40,9 @@ loss, acc = model.evaluate(x_test, y_test)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 loss, acc = model.evaluate(x_train, y_train)
-print("Loss = {}, accuracy = {}".format(loss, acc))
+print("Loss = {}, accuracy = {}".format(loss, acc))"""
 
 
-trash = y_test[y_test != np.argmax(model.predict(x_test), axis = 1)]
-print(trash)
-print(len(trash))
-plt.hist(trash, edgecolor = 'black')
-plt.show()
 
 
 
