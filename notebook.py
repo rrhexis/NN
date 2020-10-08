@@ -50,10 +50,10 @@ loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 
 
-trash = (np.asarray(np.where(y_test != np.argmax(model.predict(x_test), axis = 1)))).ravel()
-print(trash)
-print(len(trash))
+dis = (np.asarray(np.where(y_test != np.argmax(model.predict(x_test), axis = 1)))).ravel()
+print(dis)
+print(len(dis))
 
 for i in range(10):
-  display_digit(trash[i], x_test, y_test, model(x_test[trash[i]:trash[i]+1,:,:])[0])
+  display_digit(dis[i], x_test, y_test, model(x_test[dis[i]:dis[i]+1,:,:])[0])
 
