@@ -22,7 +22,7 @@ for i in range(len(y_test)):
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(x_train.shape[1], )),
-  tf.keras.layers.Dense(200, activation=tf.nn.relu),
+  tf.keras.layers.Dense(220, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.0),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
