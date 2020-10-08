@@ -32,7 +32,7 @@ def display_digit(num, x, y, vector = None):
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
   tf.keras.layers.Dropout(0.2),
-  tf.keras.layers.Dense(200, activation=tf.nn.relu),
+  tf.keras.layers.Dense(120, activation=tf.nn.relu),
   tf.keras.layers.Dropout(0.1),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
