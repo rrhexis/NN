@@ -25,7 +25,7 @@ x_train, x_test = x_train / 255.0, x_test / 255.0
 
 model = tf.keras.models.Sequential([
   tf.keras.layers.Flatten(input_shape=(28, 28)),
-  tf.keras.layers.Dense(100, activation=tf.nn.relu),
+  tf.keras.layers.Dense(100, activation=tf.nn.leaky_relu),
   tf.keras.layers.Dropout(0.0),
   tf.keras.layers.Dense(10, activation=tf.nn.softmax)
 ])
@@ -59,7 +59,7 @@ model2 = Sequential([
   Conv2D(64,kernel_size=(3,3), activation ='relu', padding='same'),
 
 	Flatten(),
-  Dense(128, activation=tf.nn.relu),
+  Dense(128, activation=tf.nn.leaky_relu),
   Dropout(0.25),
   Dense(10, activation=tf.nn.softmax)])
 model2.compile(optimizer="adam",
