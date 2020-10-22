@@ -62,7 +62,7 @@ model.summary()
 
 history = model.fit(x_train,
                     y_train,
-                    epochs=1,
+                    epochs=5,
                     validation_data=(x_test, y_test))
 
 
@@ -83,11 +83,12 @@ for a in activations:
   print(a.shape) 
 
 
-fig, image = plt.subplots(3, 1, figsize=(16, 16))
+fig, image = plt.subplots(3, 1, figsize=(8, 8))
 
 for k in range(3):
   image[k].imshow(np.vstack((np.hstack([activations[k][0, :, :, i] for i in range(0, 16)]),
                   np.hstack([activations[k][0, :, :, i] for i in range(16, 32)]))))
+  image[k].axis('off')
 image[0].set_title('conv2D_1')
 image[1].set_title('Max_Pool')
 image[2].set_title('conv2D_2')
