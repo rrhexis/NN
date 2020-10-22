@@ -60,7 +60,7 @@ model.compile(optimizer="adam",
               metrics=['accuracy'])
 model.summary()
 
-"""history = model.fit(x_train,
+history = model.fit(x_train,
                     y_train,
                     epochs=1,
                     validation_data=(x_test, y_test))
@@ -70,7 +70,7 @@ model.summary()
 loss, acc = model.evaluate(x_train, y_train)
 print("Loss = {}, accuracy = {}".format(loss, acc))
 loss, acc = model.evaluate(x_test, y_test)
-print("Loss = {}, accuracy = {}".format(loss, acc)) """
+print("Loss = {}, accuracy = {}".format(loss, acc))
 
 layer_outputs = [layer.output for layer in model.layers[:-4]]
 activation_model = tf.keras.Model(inputs = model.input, outputs = layer_outputs)
