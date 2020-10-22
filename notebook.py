@@ -82,57 +82,14 @@ layer_activation = activations[0]
 for a in activations: 
   print(a.shape) 
 
-"""w=10
-h=10
-fig=plt.figure(figsize=(10, 10))
-columns = 8
-rows = 4
-for i in range(1, columns*rows + 1):
-    img = activations[0][0, :, :, i - 1]
-    #fig.add_subplot(rows, columns, i)
-    axs = plt.subplots(rows, columns)
-    plt.subplots_adjust(wspace=0.0, hspace=0.0)
-    print(type(axs))
-    print(type(i//columns - 1))
-    axs[(i//columns - 1), i%columns].imshow(img)
-    axs.set_cmap('hot')
-    axs.axis('off')top=1.-0.5/(k*nrow+1), bottom=0.5/(nrow+1), 
-         left=0.5/(ncol+1), right=1-0.5/(ncol+1)
 
-plt.show()"""
+fig, image = plt.subplots(3, 1, figsize=(16, 16))
 
-
-ncol = 8
-nrow = 4
-fig = plt.figure(figsize=(4*nrow + 1, ncol + 1)) 
-gs1 = gridspec.GridSpec(4*nrow, ncol, width_ratios=[1, 1, 1, 1, 1, 1, 1, 1],
-         wspace=0.0, hspace=0.0, top=0.95, bottom=0.05, left=0.17, right=0.845)
-
-
-
-
-for i in range(1, ncol*nrow + 1):
-
-    if i == 4 : 
-      string1 = 'conv_2D_1',
-      string2 = 'max_pool',
-      string3 = 'conv_2D_2', 
-    else:
-      string1 = string2 = string3 = None
-
-    im = activations[0][0, :, :, i - 1]
-    ax1 = plt.subplot(gs1[((i-1)//ncol), (i-1)%(ncol)])
-    ax1.axis('off')
-    res1 = ax1.imshow(im)
-    ax1.set_title(string1)
-    im2 = activations[1][0, :, :, i - 1]
-    ax2 = plt.subplot(gs1[((i-1)//ncol)+5, (i-1)%(ncol)], title = string2)
-    ax2.axis('off')
-    res2 = ax2.imshow(im2)
-    im3 = activations[2][0, :, :, i - 1]
-    ax3 = plt.subplot(gs1[((i-1)//ncol)+10, (i-1)%(ncol)],  title = string3)
-    ax3.axis('off')
-    res3 = ax3.imshow(im3)
-
+for k in range(3):
+  image[k].imshow(np.vstack((np.hstack([activations[k][0, :, :, i] for i in range(0, 16)]),
+                  np.hstack([activations[k][0, :, :, i] for i in range(16, 32)]))))
+image[0].set_title('conv2D_1')
+image[1].set_title('Max_Pool')
+image[2].set_title('conv2D_2')
 
 plt.show()
